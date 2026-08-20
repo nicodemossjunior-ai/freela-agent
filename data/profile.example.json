@@ -1,0 +1,19 @@
+{
+  "name": "Nicodemos",
+  "title": "Senior Software Developer",
+  "technologies": [
+    "Java",
+    "Spring Boot",
+    "Node.js",
+    "React",
+    "JavaScript",
+    "Docker",
+    "PostgreSQL",
+    "Oracle"
+  ],
+  "experienceYears": 17,
+  "englishLevel": "intermediate",
+  "minimumHourlyRate": 35,
+  "preferredJobTypes": ["backend", "fullstack", "api", "integration"],
+  "avoid": ["wordpress", "crypto scam", "adult content"]
+}

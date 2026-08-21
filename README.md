@@ -46,6 +46,23 @@ O comando gera:
 
 - `output/recommendations.md`
 - `output/recommendations.json`
+- `data/freela-agent.sqlite`
+
+## Persistencia local
+
+As execucoes salvam o historico em SQLite. Vagas repetidas sao reaproveitadas por `platform + externalId` ou por `url`, evitando duplicidade entre execucoes.
+
+Use outro caminho de banco quando precisar isolar testes locais:
+
+```bash
+npm run dev -- --db data/dev.sqlite
+```
+
+Para resetar o banco local padrao:
+
+```bash
+npm run db:reset
+```
 
 ## Perfil
 
@@ -73,12 +90,12 @@ Implementado:
 - Score deterministico sem IA
 - Ranking Top N
 - Relatorios Markdown e JSON
+- Persistencia local SQLite
 - CLI local
 - Testes unitarios principais
 
 Ainda fora deste marco:
 
-- SQLite
 - Feedback persistente
 - IA
 - Coleta real da Upwork

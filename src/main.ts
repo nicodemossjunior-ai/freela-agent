@@ -7,6 +7,8 @@ import { rankRecommendations } from "./scoring/rankRecommendations.js";
 import { deduplicateJobs, normalizeUpworkJob } from "./platforms/upwork/upwork.parser.js";
 import { searchMockUpworkJobs } from "./platforms/upwork/upwork.search.js";
 import { writeReports } from "./reports/writeReports.js";
+import { openDatabase } from "./storage/db.js";
+import { StorageRepositories } from "./storage/repositories.js";
 
 export async function run(argv = process.argv.slice(2)): Promise<void> {
   const startedAt = performance.now();
@@ -22,6 +24,9 @@ export async function run(argv = process.argv.slice(2)): Promise<void> {
   const uniqueJobs = deduplicateJobs(normalizedJobs);
   const recommendations = uniqueJobs.map((job) => calculateRecommendation(profile, job));
   const ranked = rankRecommendations(recommendations, options.minScore, options.top);
+  const db = openDatabase(options.databasePath);
+  const persistence = new StorageRepositories(db).persistRun(profile, uniqueJobs, ranked);
+  db.close();
 
   await writeReports(ranked, {
     markdownPath: options.markdownPath,
@@ -33,6 +38,9 @@ export async function run(argv = process.argv.slice(2)): Promise<void> {
   console.log(`Collected jobs: ${rawJobs.length}`);
   console.log(`Normalized unique jobs: ${uniqueJobs.length}`);
   console.log(`Recommendations: ${ranked.length}`);
+  console.log(`SQLite database: ${options.databasePath}`);
+  console.log(`Persisted jobs: ${persistence.savedJobs} (${persistence.insertedJobs} new, ${persistence.reusedJobs} reused)`);
+  console.log(`Persisted recommendations: ${persistence.savedRecommendations}`);
   console.log(`Markdown report: ${options.markdownPath}`);
   console.log(`JSON report: ${options.jsonPath}`);
   console.log(`Elapsed: ${elapsedMs}ms`);

@@ -11,6 +11,7 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/main.js",
     "test": "npm run build && node --test \"dist/tests/**/*.test.js\"",
+    "db:reset": "tsx src/storage/resetDatabase.ts",
     "clean": "trash dist output/recommendations.md output/recommendations.json 2>/dev/null || true"
   },
   "keywords": [
@@ -22,8 +23,12 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^22.15.0",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3"
   }
 }

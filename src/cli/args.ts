@@ -6,6 +6,7 @@ export type CliOptions = {
   mock: boolean;
   markdownPath: string;
   jsonPath: string;
+  databasePath: string;
 };
 
 export function parseArgs(argv: string[]): CliOptions {
@@ -17,6 +18,7 @@ export function parseArgs(argv: string[]): CliOptions {
     mock: true,
     markdownPath: "output/recommendations.md",
     jsonPath: "output/recommendations.json",
+    databasePath: "data/freela-agent.sqlite",
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -51,6 +53,10 @@ export function parseArgs(argv: string[]): CliOptions {
         options.jsonPath = readValue(arg, next);
         index += 1;
         break;
+      case "--db":
+        options.databasePath = readValue(arg, next);
+        index += 1;
+        break;
       case "--help":
       case "-h":
         throw new HelpRequested(helpText());
@@ -81,6 +87,7 @@ export function helpText(): string {
     "  --mock               Use mocked Upwork jobs. Default: enabled",
     "  --markdown <path>    Markdown output path. Default: output/recommendations.md",
     "  --json <path>        JSON output path. Default: output/recommendations.json",
+    "  --db <path>          SQLite database path. Default: data/freela-agent.sqlite",
     "  --help               Show this help message",
   ].join("\n");
 }

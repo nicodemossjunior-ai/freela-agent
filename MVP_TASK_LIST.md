@@ -184,19 +184,19 @@ Critério de pronto:
 
 ## Fase 6 - Persistencia local SQLite
 
-- [ ] Escolher biblioteca SQLite para Node.js.
-- [ ] Implementar `src/storage/db.ts`.
-- [ ] Criar schema inicial:
+- [x] Escolher biblioteca SQLite para Node.js.
+- [x] Implementar `src/storage/db.ts`.
+- [x] Criar schema inicial:
   - `profiles`
   - `jobs`
   - `recommendations`
   - `feedback`
-- [ ] Implementar `src/storage/repositories.ts`.
-- [ ] Salvar vagas normalizadas.
-- [ ] Salvar recomendacoes geradas.
-- [ ] Evitar duplicidade persistente por `platform + externalId` ou `url`.
-- [ ] Preparar nomes e tipos pensando em futura migracao para PostgreSQL.
-- [ ] Adicionar comando ou script simples para resetar banco local em desenvolvimento.
+- [x] Implementar `src/storage/repositories.ts`.
+- [x] Salvar vagas normalizadas.
+- [x] Salvar recomendacoes geradas.
+- [x] Evitar duplicidade persistente por `platform + externalId` ou `url`.
+- [x] Preparar nomes e tipos pensando em futura migracao para PostgreSQL.
+- [x] Adicionar comando ou script simples para resetar banco local em desenvolvimento.
 
 Critério de pronto:
 
